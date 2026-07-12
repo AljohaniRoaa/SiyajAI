@@ -446,26 +446,15 @@ FORCE_TEXT_COLOR_CSS = """
     .stApp :not(section[data-testid="stSidebar"]):not(section[data-testid="stSidebar"] *) {
         color: #000000 !important;
     }
-
-    /* Exceptions to the black-text override above: */
-
-    /* 1) Keep the header title + subtitle white (they sit on the dark
-          navy/teal gradient banner, so black text would be invisible). */
-    .govern-header,
-    .govern-header h1,
-    .govern-header p,
-    .govern-header * {
-        color: #ffffff !important;
-    }
-
-    /* 2) Keep the inline `05` / `+966` code snippets (in the "how it
-          works" panel) green. */
-    .how-card code {
-        color: #16a34a !important;
-    }
 </style>
 """
 st.markdown(FORCE_TEXT_COLOR_CSS, unsafe_allow_html=True)
+# NOTE: the header title/subtitle (white) and the `05` / `+966` snippets
+# (green) are exempted from the rule above via inline styles applied
+# directly on those elements further down — inline styles always win over
+# an external stylesheet rule, regardless of that rule's selector
+# specificity, so this is a more reliable way to carve out exceptions than
+# trying to out-specificity the selector above.
 
 # ----------------------------------------------------------------------------
 # Inline SVG icon library (presentation only)
@@ -836,9 +825,9 @@ with st.sidebar:
 st.markdown(
     f"""
     <div class="govern-header">
-        <div class="eyebrow">🛡️ Enterprise Compliance Suite</div>
-        <h1>سياج | Siyaj AI — Data Governance &amp; Compliance Dashboard</h1>
-        <p>Automated PDPL (privacy) &amp; NDMO (governance) audit engine · Report generated {datetime.now().strftime('%d %b %Y, %H:%M')}</p>
+        <div class="eyebrow" style="color:#ffffff !important;">🛡️ Enterprise Compliance Suite</div>
+        <h1 style="color:#ffffff !important;">سياج | Siyaj AI — Data Governance &amp; Compliance Dashboard</h1>
+        <p style="color:#ffffff !important;">Automated PDPL (privacy) &amp; NDMO (governance) audit engine · Report generated {datetime.now().strftime('%d %b %Y, %H:%M')}</p>
     </div>
     """,
     unsafe_allow_html=True,
@@ -854,7 +843,7 @@ if uploaded_file is None:
 1. **Dynamic column mapping** — every column's *content* (not its header) is scanned
    with regex heuristics to infer whether it holds an ID, phone number, email, or other data type.
 2. **Heuristic engine** — distinguishes a Saudi National ID (10-digit, starts with 1 or 2)
-   from a general phone number (Saudi `05` / `+966` mobile prefix) and other numeric fields.
+   from a general phone number (Saudi <code style="color:#16a34a !important;">05</code> / <code style="color:#16a34a !important;">+966</code> mobile prefix) and other numeric fields.
 3. **Compliance engine** — grades the file against PDPL (privacy exposure) and
    NDMO (structural governance quality) and produces High / Medium / Low risk ratings.
 4. **Executive dashboard** — clean, presentation-ready summary with masked previews
