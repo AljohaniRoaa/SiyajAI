@@ -1,0 +1,20 @@
+# Python environment files
+.venv/
+env/
+venv/
+ENV/
+*.pyc
+__pycache__/
+
+# Data files (Crucial for DMO security)
+data/
+*.csv
+*.xlsx
+*.xls
+
+# Streamlit config and secrets
+.streamlit/
+
+# OS specific files
+.DS_Store
+Thumbs.db
