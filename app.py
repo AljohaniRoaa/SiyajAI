@@ -18,7 +18,16 @@ from datetime import datetime
 import numpy as np
 import pandas as pd
 import streamlit as st
-
+# أضف هذا الجزء في بداية الملف
+st.markdown("""
+<style>
+    /* هذا التعديل سيغطي أي شيء سابق */
+    [data-testid="stMetricValue"], 
+    span[data-baseweb="tag"] {
+        color: #000000 !important;
+    }
+</style>
+""", unsafe_allow_html=True)
 # ----------------------------------------------------------------------------
 # Page configuration & light styling
 # ----------------------------------------------------------------------------
@@ -951,3 +960,12 @@ st.caption(
     "Findings are heuristic and should be validated by a qualified data protection officer "
     "before use in a formal compliance decision."
 )
+st.markdown("""
+<style>
+    /* Target the small badge elements */
+    [data-testid="stMetricValue"], 
+    span[data-baseweb="tag"] {
+        color: #000000 !important;
+    }
+</style>
+""", unsafe_allow_html=True)
