@@ -446,6 +446,23 @@ FORCE_TEXT_COLOR_CSS = """
     .stApp :not(section[data-testid="stSidebar"]):not(section[data-testid="stSidebar"] *) {
         color: #000000 !important;
     }
+
+    /* Exceptions to the black-text override above: */
+
+    /* 1) Keep the header title + subtitle white (they sit on the dark
+          navy/teal gradient banner, so black text would be invisible). */
+    .govern-header,
+    .govern-header h1,
+    .govern-header p,
+    .govern-header * {
+        color: #ffffff !important;
+    }
+
+    /* 2) Keep the inline `05` / `+966` code snippets (in the "how it
+          works" panel) green. */
+    .how-card code {
+        color: #16a34a !important;
+    }
 </style>
 """
 st.markdown(FORCE_TEXT_COLOR_CSS, unsafe_allow_html=True)
