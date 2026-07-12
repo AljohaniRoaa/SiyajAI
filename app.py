@@ -433,6 +433,24 @@ CUSTOM_CSS = """
 st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
 
 # ----------------------------------------------------------------------------
+# FIX: force visible (black) text across the main app body.
+# Some Streamlit themes/environments render body text in a color that
+# matches the background, making it invisible until selected/highlighted.
+# This override forces black text everywhere in .stApp EXCEPT inside the
+# sidebar, which intentionally uses light text (#e7edf7) against its own
+# dark navy background defined above — excluding it avoids making sidebar
+# text invisible against its dark background.
+# ----------------------------------------------------------------------------
+FORCE_TEXT_COLOR_CSS = """
+<style>
+    .stApp :not(section[data-testid="stSidebar"]):not(section[data-testid="stSidebar"] *) {
+        color: #000000 !important;
+    }
+</style>
+"""
+st.markdown(FORCE_TEXT_COLOR_CSS, unsafe_allow_html=True)
+
+# ----------------------------------------------------------------------------
 # Inline SVG icon library (presentation only)
 # ----------------------------------------------------------------------------
 # Small, dependency-free line icons (Lucide-style) used in place of emoji so
